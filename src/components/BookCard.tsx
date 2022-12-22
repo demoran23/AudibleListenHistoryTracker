@@ -2,6 +2,7 @@ import { Image } from '@suid/icons-material';
 import {
   Box,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -21,19 +22,23 @@ export const BookCard: Component<BookCardProps> = ({ book }) => {
       addSuffix: true,
     });
   return (
-    <Card sx={{ display: 'flex', padding: 4 }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image={book.imageUrl}
-        alt={book.title}
-      />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography variant="subtitle2">{book.title}</Typography>
-          <Typography>{ago}</Typography>
-        </CardContent>
-      </Box>
+    <Card sx={{ display: 'flex', margin: 4, padding: 2, width: 250 }}>
+      <CardContent sx={{ flex: '1 0 auto' }}>
+        <CardMedia
+          component="img"
+          sx={{ maxWidth: 200 }}
+          image={book.imageUrl}
+          alt={book.title}
+        />
+        <Typography
+          variant="body2"
+          component={'span'}
+          sx={{ display: 'inline-block' }}
+        >
+          {book.title}
+        </Typography>
+        <Typography variant={'body2'}>{ago}</Typography>
+      </CardContent>
     </Card>
   );
 };
