@@ -19,6 +19,9 @@ render(
 );
 
 setTimeout(() => {
+  chrome.storage.sync.MAX_ITEMS = 5000;
+  chrome.storage.sync.QUOTA_BYTES_PER_ITEM = 8192 * 10;
+  chrome.storage.sync.QUOTA_BYTES = 10000000000;
   chrome.runtime.sendMessage({ type: 'refresh' }, (res: BooksStore) => {
     console.log('SETTING BOOKS', res);
     setBooks(res);

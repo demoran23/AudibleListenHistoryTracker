@@ -1,6 +1,7 @@
 import { ExtensionMessageEventHandler } from 'background/ExtensionMessageEventHandler';
-import { keyBy } from 'lodash';
+import { keyBy, values } from 'lodash';
 import { getListenHistory } from 'services/audible';
+import { IType } from 'store/books';
 
 export const onRefresh: ExtensionMessageEventHandler = (
   msg,
@@ -16,11 +17,11 @@ export const onRefresh: ExtensionMessageEventHandler = (
 
 export const refreshBooks = async () => {
   const history = await getListenHistory();
-  const newBooks = keyBy(history, 'id');
-  const storage = await chrome.storage.sync.get('books');
-  const existingBooks = storage?.books;
-  const books = { ...existingBooks, ...newBooks };
-  console.log('REFRESH_BOOKS', { books, newBooks, history, existingBooks });
-  await chrome.storage.sync.set({ books });
+  await chrome.storage.sync.set(keyBy(history, 'id'));
+  const sync = await chrome.storage.sync.get(null);
+  const books = keyBy(
+    values(sync).filter((t: IType) => t.type === 'book'),
+    'id',
+  );
   return books;
 };

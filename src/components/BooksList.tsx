@@ -1,12 +1,11 @@
 import { List } from '@suid/material';
 import { BookCard } from 'components/BookCard';
-import { values } from 'lodash';
+import { orderBy, values } from 'lodash';
 import { Component, createMemo, For } from 'solid-js';
 import { books } from 'store/books';
 
 export const BooksList: Component = () => {
-  const items = createMemo(() => values(books));
-  console.log('ITEMS', items());
+  const items = createMemo(() => orderBy(values(books), 'listenDate', 'desc'));
   return (
     <List>
       <For each={items()}>

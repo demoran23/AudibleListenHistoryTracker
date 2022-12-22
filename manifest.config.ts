@@ -31,7 +31,7 @@ export default defineManifest(async (env) => ({
   ],
   description: 'Search nyaa.si',
   host_permissions: ['https://*/*', 'http://*/*'],
-  permissions: ['tabs', 'storage', 'alarms'],
+  permissions: ['tabs', 'storage', 'alarms', 'unlimitedStorage'],
   options_page: 'options_page.html',
   manifest_version: 3,
   name: 'Audible Listen History Tracker',

@@ -1,9 +1,13 @@
 import { createStore } from 'solid-js/store';
 
-export interface Book {
+export interface IType {
+  type: 'book';
+}
+export interface Book extends IType {
   title: string;
   listenDate: string;
   id: string;
+  imageUrl: string;
 }
 
 export interface BooksStore {
