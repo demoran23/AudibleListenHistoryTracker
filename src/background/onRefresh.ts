@@ -14,14 +14,30 @@ export const onRefresh: ExtensionMessageEventHandler = (
 
   return true;
 };
+export const onInitialize: ExtensionMessageEventHandler = (
+  msg,
+  _,
+  sendResponse,
+) => {
+  if (msg.type !== 'initialize') return false;
+
+  getBooksFromStorage().then(sendResponse).catch(console.error);
+
+  return true;
+};
 
 export const refreshBooks = async () => {
   const history = await getListenHistory();
   await chrome.storage.sync.set(keyBy(history, 'id'));
+  return await getBooksFromStorage();
+};
+
+export const getBooksFromStorage = async () => {
   const sync = await chrome.storage.sync.get(null);
   const books = keyBy(
     values(sync).filter((t: IType) => t.type === 'book'),
     'id',
   );
+  console.log('SYNC', sync, books);
   return books;
 };

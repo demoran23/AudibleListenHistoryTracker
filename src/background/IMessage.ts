@@ -1,4 +1,4 @@
-export type MessageType = 'refresh' | 'show-app';
+export type MessageType = 'refresh' | 'show-app' | 'initialize';
 
 export interface IMessage {
   type: MessageType;
