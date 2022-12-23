@@ -30,7 +30,11 @@ export default defineManifest(async (env) => ({
     },
   ],
   description: 'Keep track of your audible listen history',
-  // host_permissions: ['https://*/*', 'http://*/*'],
+  icons: {
+    '16': 'favicon-16x16.png',
+    '32': 'favicon-32x32.png',
+    '128': 'favicon-32x32.png',
+  },
   permissions: ['tabs', 'storage', 'alarms'],
   options_page: 'options_page.html',
   manifest_version: 3,
